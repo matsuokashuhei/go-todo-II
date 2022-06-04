@@ -1,0 +1,12 @@
+{
+    "name": "backend",
+    "dockerComposeFile": [
+        "../../compose.yml",
+        "./compose.yml"
+    ],
+    "service": "backend",
+    "workspaceFolder": "/usr/src/todo/backend",
+    "extensions": [
+        "golang.go"
+    ]
+}
