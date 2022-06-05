@@ -6,5 +6,8 @@ import (
 	"entgo.io/ent/dialect/sql"
 )
 
+// Tag is the predicate function for tag builders.
+type Tag func(*sql.Selector)
+
 // Task is the predicate function for task builders.
 type Task func(*sql.Selector)

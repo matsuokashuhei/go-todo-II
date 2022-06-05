@@ -5,6 +5,7 @@ package ent
 import (
 	"errors"
 	"fmt"
+	"matsuokashuhei/go-todo/ent/tag"
 	"matsuokashuhei/go-todo/ent/task"
 
 	"entgo.io/ent"
@@ -29,6 +30,7 @@ type OrderFunc func(*sql.Selector)
 // columnChecker returns a function indicates if the column exists in the given column.
 func columnChecker(table string) func(string) error {
 	checks := map[string]func(string) bool{
+		tag.Table:  tag.ValidColumn,
 		task.Table: task.ValidColumn,
 	}
 	check, ok := checks[table]
