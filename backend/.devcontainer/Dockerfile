@@ -1,9 +1,10 @@
-FROM golang:1.18 as dev
-
+FROM golang:1.18 as base
 ENV GO111MODULE on
-
+ENV CGO_ENABLED=0
+ENV GOOS=linux
 WORKDIR /usr/src/todo/backend
 
+FROM base as dev
 RUN apt-get update \
  && apt install -y protobuf-compiler \
  && go install github.com/cweill/gotests/gotests@latest \
@@ -18,6 +19,11 @@ RUN apt-get update \
  && go install google.golang.org/protobuf/cmd/protoc-gen-go@v1.28 \
  && go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@v1.2
 
-COPY backend/go.mod backend/go.sum ./
-RUN go mod download
-COPY . .
+FROM base as builder
+COPY backend .
+RUN go build -o todo .
+
+FROM scratch as prod
+COPY --from=builder /usr/src/todo/backend/todo /usr/local/bin/todo
+EXPOSE 3000
+ENTRYPOINT ["/usr/local/bin/todo"]
