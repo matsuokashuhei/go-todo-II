@@ -9,7 +9,7 @@ services:
     volumes:
       - .:/usr/src/todo
 
-  mysql:
+  db:
     image: mysql:8.0-oracle
     command: mysqld --default_authentication_plugin=mysql_native_password
     environment:
