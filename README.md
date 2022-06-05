@@ -11,21 +11,29 @@ users {
 
 tasks {
   id number PK
+  user_id number FK
   name string
 }
 
-categories {
+tags {
   id number PK
   name string
 }
 
-tasks_categories {
+tasks_tags {
   id number PK
   task_id number FK
-  category_id number FK
+  tag_id number FK
 }
 
 users ||--o{ tasks : "1:n"
-tasks ||--o{ tasks_categories : "1:n"
-categories ||--|{ tasks_categories : "1:n"
+tasks ||--o{ tasks_tags : "1:n"
+tags ||--|{ tasks_tags : "1:n"
 ```
+
+## Links
+
+- [gqlgen](https://gqlgen.com/)
+- [ent](https://entgo.io/)
+- [Atlas](https://atlasgo.io/)
+- [golang-migrate](https://github.com/golang-migrate/migrate)
