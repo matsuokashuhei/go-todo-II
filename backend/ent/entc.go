@@ -19,4 +19,7 @@ func main() {
 	if err := entc.Generate("./schema", &gen.Config{}, entc.Extensions(ex)); err != nil {
 		log.Fatalf("running ent codegen: %v", err)
 	}
+	// if err := entc.Generate("./schema", &gen.Config{}, entc.Extensions(ex), entc.FeatureNames("sql/versioned-migration")); err != nil {
+	// 	log.Fatalf("running ent codegen: %v", err)
+	// }
 }

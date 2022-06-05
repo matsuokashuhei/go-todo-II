@@ -36,3 +36,4 @@ tags ||--|{ tasks_tags : "1:n"
 - [gqlgen](https://gqlgen.com/)
 - [ent](https://entgo.io/)
 - [Atlas](https://atlasgo.io/)
+- [golang-migrate](https://github.com/golang-migrate/migrate)

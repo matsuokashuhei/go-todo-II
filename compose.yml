@@ -1,24 +1,29 @@
 services:
-
   backend:
     build:
       context: .
       dockerfile: ./backend/.devcontainer/Dockerfile
+    depends_on:
+      - mysql
+      - minio
+      - elasticsearch
+    env_file:
+      - .env
     ports:
       - 3000:3000
     volumes:
       - .:/usr/src/todo
-
-  db:
+  mysql:
     image: mysql:8.0-oracle
     command: mysqld --default_authentication_plugin=mysql_native_password
     environment:
       - MYSQL_ALLOW_EMPTY_PASSWORD=true
+    env_file:
+      - .env
     ports:
       - 3306:3306
     volumes:
       - mysql-data:/var/lib/mysql
-
   minio:
     image: minio/minio:RELEASE.2022-04-26T01-20-24Z
     command: server /data --console-address ":9001"
@@ -30,7 +35,6 @@ services:
       - 9001:9001
     volumes:
       - minio-data:/data
-
   elasticsearch:
     image: elasticsearch:7.17.4
     environment:
@@ -38,16 +42,12 @@ services:
     ports:
       - 9200:9200
       - 9300:9300
-
   # schemaspy:
-
   nginx:
     image: nginx:1.20
 
 volumes:
-
   mysql-data:
     driver: local
-
   minio-data:
     driver: local
