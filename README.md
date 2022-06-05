@@ -37,3 +37,4 @@ tags ||--|{ tasks_tags : "1:n"
 - [ent](https://entgo.io/)
 - [Atlas](https://atlasgo.io/)
 - [golang-migrate](https://github.com/golang-migrate/migrate)
+- [gRPC](https://grpc.io/)
